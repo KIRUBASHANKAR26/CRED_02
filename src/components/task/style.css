@@ -1,0 +1,143 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+body{
+    height: 100vh;
+    font-size: 1.1rem;
+}
+.container{
+    border: 1px solid #dee2e6;
+    margin-left: 1rem;
+    max-width: 400px;
+}
+.form-header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-left:0.5rem ;
+    border-bottom: 1px solid #dee2e6;
+}
+.form-header button{
+    padding: 0.5rem 0.7rem;
+    border-left: 1px solid #dee2e6;
+    box-shadow: none;
+    outline: none;
+    border: none;
+    cursor: pointer;
+}
+.form-section{
+    display: none;
+    background-color: rgb(173, 212, 210);
+    padding: 0.5rem;
+}
+input{
+    margin: 1rem 0;
+    padding: 8px;
+    width: 100%;
+    border: 1px solid #dee2e6;
+}
+.date-time{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    width: 100%;
+}
+.date-time > div{
+    width: 50%;
+}
+.buttons{
+    text-align: right;
+}
+.buttons button{
+    position: relative;
+    margin-left:1rem ;
+    padding: 4px;
+    border: none;
+    background: transparent;
+}
+.cancel-button{
+    border: none;
+    background: transparent;
+}
+ button[type="submit"]{
+    border: none;
+    background: #1EAB1D;
+    border-radius: 4px;
+    padding:4px 1rem ;
+    color: #fff;
+    cursor: pointer;
+}
+h5{
+    font-weight: 400;
+}
+.save-data{
+    border:1px solid #dee2e6;
+    padding: 0.5rem;
+    position: relative;
+    margin: 1rem;
+    border-radius: 1rem;
+    background: #fff;
+}
+.save-data p:last-child{
+    position: absolute;
+    top: 50%;
+    right: 0.5rem;
+    transform: translateY(-50%);
+}
+.save-data > p:first-of-type{
+    color: rgb(158, 26, 26);
+}
+.edit{
+    border: 1px solid #dee2e6;
+    width: 2rem;
+    cursor: pointer;
+    box-shadow: none;
+    position: absolute;
+    top: 50%;
+    right: 0.5rem;
+    transform: translateY(-50%);
+}
+.edit i {
+    padding: 0.5rem;
+}
+.form-section.active{
+    display:block ;
+}
+.edit-form{
+    display: none;
+    background-color: rgb(173, 212, 210);
+    padding: 0.5rem;
+}
+.edit-form.active{
+    display: block;
+}
+.delete-button{
+    border: none;
+    background: transparent;
+    cursor: pointer;
+}
+.img-wrapper{
+    background: lightblue;
+    border-radius: 4px;
+    padding-top: 4px;
+    margin-right: 1rem;
+    float: left;
+}
+.img-wrapper img{
+    width: 2rem;
+}
+select{
+    width:100%;
+    padding:0.5rem 0rem;
+    outline: none;
+    border: 1px solid #dee2e6;
+    margin: 1rem 0;
+}
+.saved-wrapper{
+    max-height: 260px;
+    overflow-y: auto;
+}
+

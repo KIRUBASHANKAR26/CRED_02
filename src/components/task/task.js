@@ -8,7 +8,7 @@ import { API } from '../../api/api';
 const Taskform = () => {
 
     const [taskSaved, setTasksaved] = useState([])
-    const [createTask,setcreateTask] = useState(true);
+    const [createTask,setcreateTask] = useState(false);
     const [inputValue, setInputValue] = useState("");
     const [inputDate, setInputdate] = useState("");
     const [inputTime, setInputtime] = useState("");
@@ -18,6 +18,7 @@ const Taskform = () => {
     const [EditTime, setEditTime] = useState("")
     const [editId, seteditId] = useState("")
     const [loader,setLoader] = useState(true)
+    const [isActive, setIsActive] = useState(true)
 
     const handleInputTask = (e) => {
         setInputValue(e.target.value)
@@ -56,8 +57,6 @@ const Taskform = () => {
     
     const taskDetails = async(e) => {
         e.preventDefault();
-
-        
         var request = {
             assigned_user: 'user_6beec459915f4507a8d2520e60e03c3e',
             task_date: inputDate,
@@ -84,6 +83,8 @@ const Taskform = () => {
                 console.log(error.response.data);
             });
         setcreateTask(false)
+        setLoader(true)
+        setIsActive(true)
     }
 
     useEffect(() => {
@@ -106,8 +107,7 @@ const Taskform = () => {
             })
             .catch(function (error) {
                 console.log(error);
-            })
-    
+        })
     })
     const editButton = (e) => {
         setcreateTask(false)
@@ -154,11 +154,15 @@ const Taskform = () => {
                 console.log(error.response.data);
             });
         seteditTask(false)
+        setLoader(true)
+        setIsActive(true)
     }
     const create =  (e) => {
+        setIsActive(false)
         setcreateTask(true);
     }
     const deleteTask = async (e) => {
+        setIsActive(false)
         e.preventDefault();
         let deleteId = e.target.id;
         console.log("deleteId",deleteId)
@@ -179,6 +183,7 @@ const Taskform = () => {
             console.log(error.response.data);
         });
         seteditTask(false);
+        setLoader(true)
     }
 
     return ( 
@@ -186,13 +191,13 @@ const Taskform = () => {
         margin: "7rem 1rem 0 20%"}}>
         <div className="container">
             <div className="form-header">
-                <h5>Task {taskSaved?.length}</h5>
+                <h4>Task {taskSaved?.length}</h4>
                 <button onClick={create}><i className="fas fa-plus"></i></button>
             </div>
             <div className={createTask? "form-section active" : "form-section"}> 
                 <form>   
                     <div>
-                        <h5>Task Description</h5>
+                        <h5 style={{marginTop:"0 !important"}}>Task Description</h5>
                         <input type="text"  value={inputValue} onChange={handleInputTask} required/>
                     </div>
                     <div>
@@ -254,18 +259,22 @@ const Taskform = () => {
                     
                 </form>
             </div>
-            <div className="saved-wrapper">
+            <div className={isActive ? "saved-wrapper active" : "saved-wrapper"}>
             {   
                loader?(<CircularProgress />):( taskSaved?.map((item) => 
                 
                 <div key={item.id} id={item.id}  className="save-data">
                     <div className="img-wrapper">
-                        <img src="https://image.flaticon.com/icons/png/512/145/145867.png" alt="placeholder"/>
+                        <img src="https://image.flaticon.com/icons/png/512/168/168723.png" alt="placeholder"/>
                     </div>
                     <p>{item.task_msg}</p>
                     <p>{item.task_date}</p>
-                    <button className="edit" onClick={editButton}>
-                    <i id={item.id} className="fas fa-pencil-alt"></i></button>
+                    
+                    <div className="buttons-wrapper">
+                        <button className="edit" onClick={editButton}><i id={item.id} className="fas fa-pencil-alt"></i></button>
+                        <button><i className="fas fa-check"></i></button>
+                        <button><i className="fas fa-bell"></i></button>
+                    </div>
                 </div>))
             }
             </div>

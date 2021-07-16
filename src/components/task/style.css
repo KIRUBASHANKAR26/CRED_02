@@ -5,7 +5,7 @@
 }
 body{
     height: 100vh;
-    font-size: 1.1rem;
+    font-size: 1rem;
 }
 .container{
     border: 1px solid #dee2e6;
@@ -29,11 +29,11 @@ body{
 }
 .form-section{
     display: none;
-    background-color: rgb(173, 212, 210);
-    padding: 0.5rem;
+    background-color: #cce6f3;
+    padding: 0.75rem ;
 }
 input{
-    margin: 1rem 0;
+    margin-top: 0.5rem;
     padding: 8px;
     width: 100%;
     border: 1px solid #dee2e6;
@@ -78,7 +78,7 @@ h5{
     padding: 0.5rem;
     position: relative;
     margin: 1rem;
-    border-radius: 1rem;
+    border-radius: 0.5rem;
     background: #fff;
 }
 .save-data p:last-child{
@@ -87,21 +87,20 @@ h5{
     right: 0.5rem;
     transform: translateY(-50%);
 }
+.save-data > p{
+    font-size: 0.85rem;
+}
 .save-data > p:first-of-type{
     color: rgb(158, 26, 26);
 }
 .edit{
     border: 1px solid #dee2e6;
-    width: 2rem;
     cursor: pointer;
     box-shadow: none;
-    position: absolute;
-    top: 50%;
-    right: 0.5rem;
-    transform: translateY(-50%);
+    margin-right: 0.75rem;
 }
 .edit i {
-    padding: 0.5rem;
+    padding: 0.4rem;
 }
 .form-section.active{
     display:block ;
@@ -120,9 +119,6 @@ h5{
     cursor: pointer;
 }
 .img-wrapper{
-    background: lightblue;
-    border-radius: 4px;
-    padding-top: 4px;
     margin-right: 1rem;
     float: left;
 }
@@ -134,10 +130,39 @@ select{
     padding:0.5rem 0rem;
     outline: none;
     border: 1px solid #dee2e6;
-    margin: 1rem 0;
+    margin:0.5rem 0;
 }
 .saved-wrapper{
+    display: none;
     max-height: 260px;
     overflow-y: auto;
 }
+h5{
+    font-size: 0.75rem;
+    font-weight: 400;
+    opacity: 80%;
+    margin-top: 1rem;
+}
+h4{
+    font-size: 1rem;
+    font-weight: 500;
+    letter-spacing: 1px;
+}
+.buttons-wrapper{
+    position: absolute;
+    top: 11px;
+    right: 1rem;
+}
+.buttons-wrapper button{
+    border: 1px solid #dee2e6;
+    cursor: pointer;
+}
+.buttons-wrapper button > i{
+    padding: 0.4rem;
+}
+.saved-wrapper.active{
+    display: block;
+}
+
+
 

@@ -59,6 +59,7 @@ input{
     background: transparent;
 }
 .cancel-button{
+    cursor: pointer;
     border: none;
     background: transparent;
 }

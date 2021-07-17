@@ -19,6 +19,8 @@ const Taskform = () => {
     const [editId, seteditId] = useState("")
     const [loader,setLoader] = useState(true)
     const [isActive, setIsActive] = useState(true)
+    const [userDefault, setDefaultUser] = useState("")
+
 
     const handleInputTask = (e) => {
         setInputValue(e.target.value)
@@ -53,6 +55,15 @@ const Taskform = () => {
         if (minutes < 10) {minutes = "0"+minutes;}
         return hours+':'+minutes;
     }
+    const cancel = (e) => {
+        e.preventDefault();
+        setcreateTask(false);
+        seteditTask(false)
+        setIsActive(true)
+    }
+    const selectValue = (e) => {
+        setDefaultUser(e.target.value);
+    }
     
     
     const taskDetails = async(e) => {
@@ -85,6 +96,11 @@ const Taskform = () => {
         setcreateTask(false)
         setLoader(true)
         setIsActive(true)
+        setInputValue("")
+        setInputdate("")
+        setInputtime("")
+        setDefaultUser("Choose");
+
     }
 
     useEffect(() => {
@@ -115,7 +131,6 @@ const Taskform = () => {
         var editIndex = e.target.id;
 
         let editData = taskSaved?.filter((item =>  item.id === editIndex))
-        console.log("editIndex",editIndex)
         editData?.map(item => 
             {
             seteditId(item.id)
@@ -127,7 +142,6 @@ const Taskform = () => {
     const updateTask = (e) => {
         e.preventDefault();
         let id = e.target.id;
-        console.log("id",id);
         let request = {
             assigned_user: 'user_6beec459915f4507a8d2520e60e03c3e',
             task_date: EditDate,
@@ -162,28 +176,30 @@ const Taskform = () => {
         setcreateTask(true);
     }
     const deleteTask = async (e) => {
-        setIsActive(false)
+        setIsActive(true)
         e.preventDefault();
         let deleteId = e.target.id;
         console.log("deleteId",deleteId)
-        window.confirm("ARE YOU SURE")
-        var header = {
-            Authorization:
-              'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2MjQzNjk0NzksIm5iZiI6MTYyNDM2OTQ3OSwianRpIjoiYjk5OTczNzktNTY5Zi00NGQzLTg1ODktMjZiYjk5OWIxNzI5IiwiaWRlbnRpdHkiOnsibmFtZSI6IlN1YmkgU2lyIiwiZW1haWwiOiJzbWl0aGNoZXJ5bEB5YWhvby5jb20iLCJ1c2VyX2lkIjoidXNlcl82YmVlYzQ1OTkxNWY0NTA3YThkMjUyMGU2MGUwM2MzZSIsImNvbXBhbnlfaWQiOiJjb21wYW55XzNjNjhjZDk0ZWJkNjQ4Yzc4ZDc2ODcyY2ZhOWY4Y2ZiIiwiaWNvbiI6Imh0dHA6Ly93d3cuZ3JhdmF0YXIuY29tL2F2YXRhci9mMmU5YWNkZWM4MTdlMjRkMjk4MGQ4NTNlODkzODVmNT9kZWZhdWx0PWh0dHBzJTNBJTJGJTJGczMuc2xvb3ZpLmNvbSUyRmF2YXRhci1kZWZhdWx0LWljb24ucG5nIiwiYnlfZGVmYXVsdCI6Im91dHJlYWNoIn0sImZyZXNoIjpmYWxzZSwidHlwZSI6ImFjY2VzcyJ9.xOCMLMFebVbIK1xgprZuKgxm8pdHgmz0RUrD_2I7Rvs',
-            Accept: 'application/json',
-            'Content-Type': 'application/json'
-        };
-        axios({
-            method: 'delete',
-            url:
-            `https://stage.api.sloovi.com/task/lead_6996a7dcdddc4af3b4f71ccb985cea38/${deleteId}`,
-            headers: header,
-        })
-        .catch(function (error) {
-            console.log(error.response.data);
-        });
-        seteditTask(false);
-        setLoader(true)
+        let check = window.confirm("ARE YOU SURE")
+        if(check === true){
+            var header = {
+                Authorization:
+                'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2MjQzNjk0NzksIm5iZiI6MTYyNDM2OTQ3OSwianRpIjoiYjk5OTczNzktNTY5Zi00NGQzLTg1ODktMjZiYjk5OWIxNzI5IiwiaWRlbnRpdHkiOnsibmFtZSI6IlN1YmkgU2lyIiwiZW1haWwiOiJzbWl0aGNoZXJ5bEB5YWhvby5jb20iLCJ1c2VyX2lkIjoidXNlcl82YmVlYzQ1OTkxNWY0NTA3YThkMjUyMGU2MGUwM2MzZSIsImNvbXBhbnlfaWQiOiJjb21wYW55XzNjNjhjZDk0ZWJkNjQ4Yzc4ZDc2ODcyY2ZhOWY4Y2ZiIiwiaWNvbiI6Imh0dHA6Ly93d3cuZ3JhdmF0YXIuY29tL2F2YXRhci9mMmU5YWNkZWM4MTdlMjRkMjk4MGQ4NTNlODkzODVmNT9kZWZhdWx0PWh0dHBzJTNBJTJGJTJGczMuc2xvb3ZpLmNvbSUyRmF2YXRhci1kZWZhdWx0LWljb24ucG5nIiwiYnlfZGVmYXVsdCI6Im91dHJlYWNoIn0sImZyZXNoIjpmYWxzZSwidHlwZSI6ImFjY2VzcyJ9.xOCMLMFebVbIK1xgprZuKgxm8pdHgmz0RUrD_2I7Rvs',
+                Accept: 'application/json',
+                'Content-Type': 'application/json'
+            };
+            axios({
+                method: 'delete',
+                url:
+                `https://stage.api.sloovi.com/task/lead_6996a7dcdddc4af3b4f71ccb985cea38/${deleteId}`,
+                headers: header,
+            })
+            .catch(function (error) {
+                console.log(error.response.data);
+            });
+            seteditTask(false);
+            setLoader(true)
+        }
     }
 
     return ( 
@@ -213,13 +229,13 @@ const Taskform = () => {
                         </div>
                         <div>
                             <h5>Assign User</h5>
-                            <select  placeholder="Select User" aria-label=".form-select-lg example" required>
-                                <option value="Choose">Choose...</option>
+                            <select value={userDefault} onChange={selectValue} aria-label=".form-select-lg example" required>
+                                <option value="Choose" >Choose...</option>
                                 <option value="user_6beec459915f4507a8d2520e60e03c3e">Subi</option>
                             </select>
                         </div>
                         <div className="buttons">
-                            <button>Cancel</button>
+                            <button className= "cancel-button" onClick={cancel}>Cancel</button>
                             <button type="submit" onClick={taskDetails}>Save</button>
                         </div>
                     </div>
@@ -252,7 +268,7 @@ const Taskform = () => {
                         </div>
                         <div className="buttons">
                             <button className="delete-button"  onClick={deleteTask}><i id={editId} className="fas fa-trash-alt"></i></button>
-                            <button className= "cancel-button">Cancel</button>
+                            <button className= "cancel-button" onClick={cancel}>Cancel</button>
                             <button type="submit" id={editId} onClick={updateTask}>Save</button>
                         </div>
                     </div>

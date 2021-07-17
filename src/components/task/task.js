@@ -21,7 +21,7 @@ const Taskform = () => {
     const [isActive, setIsActive] = useState(true)
     const [userDefault, setDefaultUser] = useState("")
 
-
+//---------------HandleInput-------------
     const handleInputTask = (e) => {
         setInputValue(e.target.value)
     }  
@@ -39,7 +39,8 @@ const Taskform = () => {
     }  
     const editInputTime = (e) => {
         setEditTime(e.target.value)
-    }    
+    }
+//----------------------Time Convert ,Hours to seconds       
     const hourToSec = (hms) => {
         var a = hms.split(' ');
         var c = a[0].split(":")
@@ -47,6 +48,7 @@ const Taskform = () => {
         var seconds = (+b) * 60 * 60 + (+c[1]);
         return seconds
     }
+//----------------------Time Convert ,sec to hour -------- 
     const secTOhour = (value) => {
         const sec = parseInt(value, 10);
         let hours   = Math.floor(sec / 3600); 
@@ -55,6 +57,7 @@ const Taskform = () => {
         if (minutes < 10) {minutes = "0"+minutes;}
         return hours+':'+minutes;
     }
+//-----------------------Onclick Cancel Button-------
     const cancel = (e) => {
         e.preventDefault();
         setcreateTask(false);
@@ -65,7 +68,7 @@ const Taskform = () => {
         setDefaultUser(e.target.value);
     }
     
-    
+////----------------------- POST METHOD------------------
     const taskDetails = async(e) => {
         e.preventDefault();
         var request = {
@@ -100,11 +103,10 @@ const Taskform = () => {
         setInputdate("")
         setInputtime("")
         setDefaultUser("Choose");
-
     }
 
+//---------------------GET METHOD------------------
     useEffect(() => {
-
         var header = {
             Authorization:
               'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2MjQzNjk0NzksIm5iZiI6MTYyNDM2OTQ3OSwianRpIjoiYjk5OTczNzktNTY5Zi00NGQzLTg1ODktMjZiYjk5OWIxNzI5IiwiaWRlbnRpdHkiOnsibmFtZSI6IlN1YmkgU2lyIiwiZW1haWwiOiJzbWl0aGNoZXJ5bEB5YWhvby5jb20iLCJ1c2VyX2lkIjoidXNlcl82YmVlYzQ1OTkxNWY0NTA3YThkMjUyMGU2MGUwM2MzZSIsImNvbXBhbnlfaWQiOiJjb21wYW55XzNjNjhjZDk0ZWJkNjQ4Yzc4ZDc2ODcyY2ZhOWY4Y2ZiIiwiaWNvbiI6Imh0dHA6Ly93d3cuZ3JhdmF0YXIuY29tL2F2YXRhci9mMmU5YWNkZWM4MTdlMjRkMjk4MGQ4NTNlODkzODVmNT9kZWZhdWx0PWh0dHBzJTNBJTJGJTJGczMuc2xvb3ZpLmNvbSUyRmF2YXRhci1kZWZhdWx0LWljb24ucG5nIiwiYnlfZGVmYXVsdCI6Im91dHJlYWNoIn0sImZyZXNoIjpmYWxzZSwidHlwZSI6ImFjY2VzcyJ9.xOCMLMFebVbIK1xgprZuKgxm8pdHgmz0RUrD_2I7Rvs',
@@ -125,6 +127,7 @@ const Taskform = () => {
                 console.log(error);
         })
     })
+    //---------------On click edit button------------
     const editButton = (e) => {
         setcreateTask(false)
         seteditTask(true)
@@ -139,6 +142,7 @@ const Taskform = () => {
             setEditTime(secTOhour(item.task_time))}
         );
     }
+    //-----------------Save the edited details and PUT Method
     const updateTask = (e) => {
         e.preventDefault();
         let id = e.target.id;
@@ -171,10 +175,13 @@ const Taskform = () => {
         setLoader(true)
         setIsActive(true)
     }
+
+    //-------------On Click the Create button to view form------------------
     const create =  (e) => {
         setIsActive(false)
         setcreateTask(true);
     }
+    //--------------Delete method------------------
     const deleteTask = async (e) => {
         setIsActive(true)
         e.preventDefault();

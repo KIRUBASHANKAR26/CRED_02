@@ -119,7 +119,6 @@ const Taskform = () => {
             headers: header
           })
             .then(function (response) {
-                console.log(response)
                 setTasksaved(response.data.results);
                 setLoader(false)
             })

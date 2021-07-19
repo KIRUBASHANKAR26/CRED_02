@@ -93,6 +93,7 @@ h5{
 }
 .save-data > p:first-of-type{
     color: rgb(158, 26, 26);
+    max-width: 70%;
 }
 .edit{
     border: 1px solid #dee2e6;
